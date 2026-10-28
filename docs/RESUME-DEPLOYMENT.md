@@ -8,8 +8,8 @@ Project: `/Users/ardatas/Desktop/Projects/studyplan-organizer`, branch `codex/tu
 
 - Local production preview: http://127.0.0.1:4173/ (restart with `npm run preview -- --port 4173` if needed).
 - Correct upload: `artifacts/studyplan-v2-upload.zip`.
-- SHA-256: `7091170593191b901d8ac0f0c1e6bbda58a825a63f2019b923abdc73f72d7c07`.
-- Release: `artifacts/studyplan-2026-10-28T01-27-38-902Z.zip`.
+- SHA-256: `38b1f07ba1b3fe5496ff7d1250834c7b3abd0ed6662ab29586962871357880b3`.
+- Release: `artifacts/studyplan-2026-10-28T01-33-43-112Z.zip`.
 - Screenshots: `artifacts/preview-desktop-v2.png`, `preview-mobile-v2.png`, `detail-mobile-v2.png`, `webkit-mobile-mobile-week-v2.png`.
 - 12 core tests and 20 browser tests pass. Mobile Week fix supports readable horizontally scrolling columns below 901px; desktop retains five-day fit. Focused tests cover 320/390/768/1024px in Chromium and WebKit.
 - Local commits are not pushed. Do not infer remote source publication.
@@ -36,4 +36,8 @@ No credentials or session tokens are stored here.
 
 ## Course colour update
 
-GDB blue, GBS teal, IT Security amber and Analysis coral now apply consistently to calendar cards, overlap badges, tutorial rows, selected states, course filtering and compact details. The course key shows selection counts across courses. Production build and all 20 browser tests passed again. Additional Chromium/WebKit checks selected one tutorial from each course and verified four distinct row colours and all four choices after reload. Screenshots: `artifacts/course-colours-desktop.png` and `artifacts/course-colours-mobile.png`. Hosting remains pending the previously recorded Safari blocker.
+GDB blue, GBS green, IT Security amber and Analysis rose now apply consistently to calendar cards, overlap badges, tutorial rows, selected states, course filtering and compact details. The course key shows selection counts across courses. Production build and all 20 browser tests passed again. Additional Chromium/WebKit checks selected one tutorial from each course and verified four distinct row colours and all four choices after reload. Screenshots: `artifacts/course-colours-desktop.png` and `artifacts/course-colours-mobile.png`. Hosting remains pending the previously recorded Safari blocker.
+
+## Palette and spacing refinement
+
+Brighter distinct course accents now use deliberate dark surfaces. Added responsive outer gutters, an inset timetable grid, padded day headers and cards, and more space in tutorial rows and controls. Production build and all 20 existing browser checks passed; desktop/mobile screenshots were inspected. Updated release packaged above; publication is still pending.

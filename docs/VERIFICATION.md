@@ -6,9 +6,9 @@
 - 12 logic tests passed, including all 107 sourced slots, Berlin DST, source exceptions, assembly suspensions, overlap grouping, plan parsing and ICS parsing/UTF-8 folding.
 - 20 browser tests passed across desktop Chromium and mobile WebKit. Coverage includes selection, persisted plan and course/search/type filters, guarded reset, safe shared previews, unavailable/corrupt storage, compact detail keyboard/outside dismissal and focus return, actual ICS downloads, exclusions, provisional export, calendar views and range navigation.
 - Desktop Week fits all five weekdays without horizontal scrolling at 1024 and 1440 pixels. Below 901 pixels, Week uses readable columns in a horizontal scroller with a visible swipe hint and sticky time axis. Tested at 320, 390 and 768 pixels in both engines, including reaching Friday and opening Day view. Default phone view remains Day.
-- Dark blue full-viewport layout identifies TUM Computer Science semester 3 and carries the university/unofficial attribution at mobile sizes. Desktop calendar starts at 166px and fills over 75% of the viewport.
+- Dark blue full-viewport layout identifies TUM Computer Science semester 3 and carries the university/unofficial attribution at mobile sizes. Desktop calendar starts at 184px and fills over 75% of the viewport.
 - Selected-plan desktop/mobile screenshots, phone Week and compact details were visually inspected. Files use `-v2` names; older purple screenshots are obsolete.
-- Revised ZIP integrity passed. Upload ZIP SHA-256: `7091170593191b901d8ac0f0c1e6bbda58a825a63f2019b923abdc73f72d7c07`. It excludes hosting-generated `.htaccess`.
+- Revised ZIP integrity passed. Upload ZIP SHA-256: `38b1f07ba1b3fe5496ff7d1250834c7b3abd0ed6662ab29586962871357880b3`. It excludes hosting-generated `.htaccess`.
 
 ## Hosting and publication boundary
 
@@ -24,4 +24,8 @@ No Apple or Google Calendar account was modified. ICS compatibility is supported
 
 ## Course colour update
 
-GDB blue, GBS teal, IT Security amber and Analysis coral now apply consistently to calendar cards, overlap badges, tutorial rows, selected states, course filtering and compact details. The course key shows selection counts across courses. Production build and all 20 browser tests passed again. Additional Chromium/WebKit checks selected one tutorial from each course and verified four distinct row colours and all four choices after reload. Screenshots: `artifacts/course-colours-desktop.png` and `artifacts/course-colours-mobile.png`. Hosting remains pending the previously recorded Safari blocker.
+GDB blue, GBS green, IT Security amber and Analysis rose now apply consistently to calendar cards, overlap badges, tutorial rows, selected states, course filtering and compact details. The course key shows selection counts across courses. Production build and all 20 browser tests passed again. Additional Chromium/WebKit checks selected one tutorial from each course and verified four distinct row colours and all four choices after reload. Screenshots: `artifacts/course-colours-desktop.png` and `artifacts/course-colours-mobile.png`. Hosting remains pending the previously recorded Safari blocker.
+
+## Palette and spacing refinement
+
+Brighter distinct course accents now use deliberate dark surfaces. Added responsive outer gutters, an inset timetable grid, padded day headers and cards, and more space in tutorial rows and controls. Production build and all 20 existing browser checks passed; desktop/mobile screenshots were inspected. Updated release packaged above; publication is still pending.
