@@ -6,6 +6,19 @@ The user selected `studyplan.ardatas.com` on 28 October 2026. The app runs at th
 
 Use only the **viewport-v2** release. The earlier uploaded `studyplan-upload.zip` contains the obsolete purple design and must not be extracted. Archive it outside the public document root. The current upload is `studyplan-v2-upload.zip`; its HTML has the `studyplan-release: viewport-v2` marker.
 
+## Manual rebuild from GitHub
+
+Use branch `codex/tutorial-calendar` of `https://github.com/ardatas/studyplan-organizer.git` for the latest selected-session update. In a clean checkout:
+
+```sh
+git switch codex/tutorial-calendar
+git pull --ff-only origin codex/tutorial-calendar
+npm ci
+npm run package
+```
+
+Deploy the generated upload archive as described below. The repository contains source, not prebuilt `dist/` files; copying the raw GitHub checkout into the public root will not deploy the app. No automatic deployment is configured by this update.
+
 ## Local review
 
 Requires Node 22.12+ (tested with Node 24):

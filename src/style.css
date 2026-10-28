@@ -59,9 +59,9 @@
 @container(max-height:35px){.lane-event .card-course,.lane-event .card-tiny-course{font-size:10px!important}.lane-event .card-short-label{font-size:11px;line-height:1}}
 
 /* Saved sessions remain readable context beside the current tutorial options. */
-.event-card.selected-context,.lane-event>.event-card.selected-context{background:color-mix(in srgb,var(--event-color) 9%,transparent);border-color:color-mix(in srgb,var(--event-color) 55%,#a7b9d2);border-style:dashed;box-shadow:none;color:#c3cfdf}
+.event-card.selected-context,.lane-event>.event-card.selected-context{opacity:.5;background:var(--event-surface);border-color:color-mix(in srgb,var(--event-color) 55%,#a7b9d2);border-style:dashed;box-shadow:none;color:#c3cfdf}
 .event-card.selected-context strong,.event-card.selected-context .card-course,.event-card.selected-context .card-tiny-course,.event-card.selected-context .event-time{color:color-mix(in srgb,var(--event-color) 55%,#c3cfdf)}
-.event-card.selected-context:hover,.event-card.selected-context:focus-visible{background:color-mix(in srgb,var(--event-color) 18%,transparent)}
+.event-card.selected-context:hover,.event-card.selected-context:focus-visible{opacity:1;background:color-mix(in srgb,var(--event-color) 18%,var(--event-surface))}
 .event-card strong{position:relative}.overlap-mark{display:inline-grid;place-items:center;min-width:13px;height:13px;margin-right:3px;border-radius:3px;background:#ffd08a;color:#302410;font:800 11px/1 sans-serif;vertical-align:middle}
 .selection-key{display:flex;flex-wrap:wrap;gap:4px 16px;padding:0 4px 9px;color:#b8c9dc;font-size:11px;flex-shrink:0}.selection-key>span{display:inline-flex;align-items:center;gap:6px}.selection-key i{font-style:normal;border:1px dashed #91a4bc;background:#a7b9d217;color:#c3cfdf;padding:0 4px;border-radius:3px}.selection-key b{color:#ffd08a}
 @container(max-width:55px){.overlap-mark{min-width:9px;width:9px;height:10px;font-size:9px;margin-right:1px}}

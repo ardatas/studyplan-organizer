@@ -125,7 +125,7 @@ test('selected tutorials stay as translucent context across filters without cove
  await page.getByRole('button',{name:'Day',exact:true}).click();
  const saved=page.locator('.event-card[data-slot-id="its-16"]');
  await expect(saved).toHaveCount(1);await expect(saved).toHaveClass(/selected-context/);
- await expect(saved).toHaveAccessibleName(/Selected in my plan/);
+ await expect(saved).toHaveAccessibleName(/Selected in my plan/);await expect(saved).toHaveCSS('opacity','0.5');
  const options=page.locator('.event-card:not(.selected-context)');expect(await options.count()).toBeGreaterThan(0);
  const overlap=page.locator('.event-card.plan-overlap:not(.selected-context)').first();await expect(overlap).toBeVisible();
  const a=(await saved.boundingBox())!,b=(await overlap.boundingBox())!;expect(a.x+a.width<=b.x+.5||b.x+b.width<=a.x+.5).toBe(true);
