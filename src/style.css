@@ -38,3 +38,7 @@
 @container(max-height:30px){.positioned-event>.event-card,.positioned-event>.event-group{padding:0 4px!important;justify-content:center}.event-card strong,.event-group strong{font-size:9px!important;line-height:1!important}.event-card>span,.event-card>small,.event-group>span{display:none!important}}
 
 @container(min-height:49px){.positioned-event>.event-card,.positioned-event>.event-group{padding:10px 12px}}
+
+/* Primary planner sections stand apart from the smaller filters. */
+.mode-switch{padding:4px;gap:4px;border-radius:10px;border-color:#456486;background:#0b1b2e;box-shadow:0 2px 8px #0002}.mode-switch button{min-height:50px;padding:12px 18px;font-size:16px;font-weight:700;gap:9px;border-radius:7px;color:#c3d4e8;white-space:nowrap}.mode-switch button:hover{background:#203d5d;color:#fff}.mode-switch button[aria-pressed=true]{background:#9bd3ff;color:#07192b;box-shadow:0 2px 6px #0003}.mode-switch span{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:2px 6px;font:700 12px 'DM Sans Variable',sans-serif;border-radius:6px;background:#243e5c;color:#eaf2ff}.mode-switch button[aria-pressed=true] span{background:#0b3152;color:#fff}
+@media(max-width:700px){.mode-switch{padding:3px;gap:3px}.mode-switch button{min-height:48px;font-size:14px;padding:10px 7px;gap:6px}.mode-switch button>svg{display:none}.mode-switch span{min-width:21px;height:21px;font-size:11px}.range-button{align-self:stretch}}

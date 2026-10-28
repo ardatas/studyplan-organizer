@@ -8,7 +8,7 @@
 - Desktop Week fits all five weekdays without horizontal scrolling at 1024 and 1440 pixels. Below 901 pixels, Week uses readable columns in a horizontal scroller with a visible swipe hint and sticky time axis. Tested at 320, 390 and 768 pixels in both engines, including reaching Friday and opening Day view. Default phone view remains Day.
 - Dark blue full-viewport layout identifies TUM Computer Science semester 3 and carries the university/unofficial attribution at mobile sizes. Desktop calendar starts at 184px and fills over 75% of the viewport.
 - Selected-plan desktop/mobile screenshots, phone Week and compact details were visually inspected. Files use `-v2` names; older purple screenshots are obsolete.
-- Revised ZIP integrity passed. Upload ZIP SHA-256: `a1112cb1de21f19e06d1584b7a13ff26b7bc995d38535cb1cab8ba9c65b10c16`. It excludes hosting-generated `.htaccess`.
+- Revised ZIP integrity passed. Upload ZIP SHA-256: `41cdf4e128a051d31507861a60bc531cda3a01fb58b68925db99d1f84f6ba66d`. It excludes hosting-generated `.htaccess`.
 
 ## Hosting and publication boundary
 
@@ -37,3 +37,7 @@ Day and Week now fit 07:00–20:00 into the available table height without verti
 ## Additional table padding
 
 Increased outer timetable padding to 24px on desktop and 12px on mobile, increased day-header height and session-card padding, and retained full-day fit. The first regression run passed 20/22 checks; a tablet-width adjustment resolved the two column-width failures. All six affected layout checks then passed in Chromium and WebKit.
+
+## Prominent section switch
+
+Renamed primary modes to Find tutorials and My plan. Increased button size, type weight and padding; added desktop icons, a high-contrast active fill and a larger plan count. Mobile buttons retain comfortable 48px touch targets. Production build and all 22 browser checks pass, including full-day fit and 320px layout.

@@ -8,8 +8,8 @@ Project: `/Users/ardatas/Desktop/Projects/studyplan-organizer`, branch `codex/tu
 
 - Local production preview: http://127.0.0.1:4173/ (restart with `npm run preview -- --port 4173` if needed).
 - Correct upload: `artifacts/studyplan-v2-upload.zip`.
-- SHA-256: `a1112cb1de21f19e06d1584b7a13ff26b7bc995d38535cb1cab8ba9c65b10c16`.
-- Release: `artifacts/studyplan-2026-10-28T01-44-23-216Z.zip`.
+- SHA-256: `41cdf4e128a051d31507861a60bc531cda3a01fb58b68925db99d1f84f6ba66d`.
+- Release: `artifacts/studyplan-2026-10-28T01-46-16-302Z.zip`.
 - Screenshots: `artifacts/preview-desktop-v2.png`, `preview-mobile-v2.png`, `detail-mobile-v2.png`, `webkit-mobile-mobile-week-v2.png`.
 - 12 core tests and 20 browser tests pass. Mobile Week fix supports readable horizontally scrolling columns below 901px; desktop retains five-day fit. Focused tests cover 320/390/768/1024px in Chromium and WebKit.
 - Local commits are not pushed. Do not infer remote source publication.
@@ -49,3 +49,7 @@ Day and Week now fit 07:00–20:00 into the available table height without verti
 ## Additional table padding
 
 Increased outer timetable padding to 24px on desktop and 12px on mobile, increased day-header height and session-card padding, and retained full-day fit. The first regression run passed 20/22 checks; a tablet-width adjustment resolved the two column-width failures. All six affected layout checks then passed in Chromium and WebKit.
+
+## Prominent section switch
+
+Renamed primary modes to Find tutorials and My plan. Increased button size, type weight and padding; added desktop icons, a high-contrast active fill and a larger plan count. Mobile buttons retain comfortable 48px touch targets. Production build and all 22 browser checks pass, including full-day fit and 320px layout.
