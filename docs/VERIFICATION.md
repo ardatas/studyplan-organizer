@@ -8,7 +8,7 @@
 - Desktop Week fits all five weekdays without horizontal scrolling at 1024 and 1440 pixels. Below 901 pixels, Week uses readable columns in a horizontal scroller with a visible swipe hint and sticky time axis. Tested at 320, 390 and 768 pixels in both engines, including reaching Friday and opening Day view. Default phone view remains Day.
 - Dark blue full-viewport layout identifies TUM Computer Science semester 3 and carries the university/unofficial attribution at mobile sizes. Desktop calendar starts at 184px and fills over 75% of the viewport.
 - Selected-plan desktop/mobile screenshots, phone Week and compact details were visually inspected. Files use `-v2` names; older purple screenshots are obsolete.
-- Revised ZIP integrity passed. Upload ZIP SHA-256: `f072470b610fcfbea101c4daceceb299d8ad85d4bd635934f045582f0408e13e`. It excludes hosting-generated `.htaccess`.
+- Revised ZIP integrity passed. Upload ZIP SHA-256: `c808b7f3edcd5f1f66d77781668d8eed70b18bfd096ae4888f01c33192adc2fa`. It excludes hosting-generated `.htaccess`.
 
 ## Hosting and publication boundary
 
@@ -45,3 +45,7 @@ Renamed primary modes to Find tutorials and My plan. Increased button size, type
 ## Side-by-side sessions
 
 Overlapping sessions now render directly in separate proportional lanes inside each time box. Each starts/ends at its sourced time, retains its course colour and opens details directly. Narrow lanes use compact course/group labels with full hover and accessible names. The former overlap picker was removed. All 24 browser checks passed; after a short-screen refinement, the eight affected layout/interaction checks passed again. Tests verify every event is represented, bounds are respected, concurrent lanes do not intersect, keyboard details/focus return work, and the full day remains visible. Desktop and mobile screenshots inspected.
+
+## Crowded-slot readability
+
+Removed rotated/wrapped course text. Compact cards show a horizontal course code and a larger high-contrast group number or letter, with stronger coloured top edges. The narrowest lanes use DB/OS/IT/AN codes; full course, time, tutor and room remain in hover/accessibility labels and clickable details. Build and all eight affected desktop/mobile browser checks passed. Desktop screenshot visually inspected.

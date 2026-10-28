@@ -8,8 +8,8 @@ Project: `/Users/ardatas/Desktop/Projects/studyplan-organizer`, branch `codex/tu
 
 - Local production preview: http://127.0.0.1:4173/ (restart with `npm run preview -- --port 4173` if needed).
 - Correct upload: `artifacts/studyplan-v2-upload.zip`.
-- SHA-256: `f072470b610fcfbea101c4daceceb299d8ad85d4bd635934f045582f0408e13e`.
-- Release: `artifacts/studyplan-2026-10-28T02-06-06-067Z.zip`.
+- SHA-256: `c808b7f3edcd5f1f66d77781668d8eed70b18bfd096ae4888f01c33192adc2fa`.
+- Release: `artifacts/studyplan-2026-10-28T02-07-59-458Z.zip`.
 - Screenshots: `artifacts/preview-desktop-v2.png`, `preview-mobile-v2.png`, `detail-mobile-v2.png`, `webkit-mobile-mobile-week-v2.png`.
 - 12 core tests and 20 browser tests pass. Mobile Week fix supports readable horizontally scrolling columns below 901px; desktop retains five-day fit. Focused tests cover 320/390/768/1024px in Chromium and WebKit.
 - Local commits are not pushed. Do not infer remote source publication.
@@ -57,3 +57,7 @@ Renamed primary modes to Find tutorials and My plan. Increased button size, type
 ## Side-by-side sessions
 
 Overlapping sessions now render directly in separate proportional lanes inside each time box. Each starts/ends at its sourced time, retains its course colour and opens details directly. Narrow lanes use compact course/group labels with full hover and accessible names. The former overlap picker was removed. All 24 browser checks passed; after a short-screen refinement, the eight affected layout/interaction checks passed again. Tests verify every event is represented, bounds are respected, concurrent lanes do not intersect, keyboard details/focus return work, and the full day remains visible. Desktop and mobile screenshots inspected.
+
+## Crowded-slot readability
+
+Removed rotated/wrapped course text. Compact cards show a horizontal course code and a larger high-contrast group number or letter, with stronger coloured top edges. The narrowest lanes use DB/OS/IT/AN codes; full course, time, tutor and room remain in hover/accessibility labels and clickable details. Build and all eight affected desktop/mobile browser checks passed. Desktop screenshot visually inspected.
