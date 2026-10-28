@@ -20,3 +20,7 @@ Live application checks are recorded after extraction and must not be inferred f
 ## Limits
 
 No Apple Calendar or Google Calendar account was modified. ICS compatibility is supported by standards/parser checks and real browser downloads, not an end-to-end personal-account import. GDB dated sessions remain provisional. Analysis and GDB lectures remain unverified and omitted. The course snapshot is not a live subscription.
+
+## Publication boundary
+
+The final release ZIP uploaded successfully and its public bytes matched SHA-256 `0eca674f2998a7da87dea6797da99b9393e3e70e1c917dbb5103ec63ffe257e3`. Extraction remains pending because Safari window control became unavailable. Studyplan root still returns HTTP 403; the personal homepage returns HTTP 200. No live app interaction tests have been claimed. See [resume record](RESUME-DEPLOYMENT.md).
