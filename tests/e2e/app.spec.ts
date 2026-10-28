@@ -104,3 +104,16 @@ test('overlapping sessions have separate clickable lanes inside their time box',
  }
  const last=page.locator('.overlap-lanes .event-card').last();await last.focus();await last.press('Enter');await expect(page.getByRole('dialog')).toBeVisible();await page.keyboard.press('Escape');await expect(last).toBeFocused();
 });
+
+test('NumProg options preserve split groups and selections across courses',async({page},info)=>{
+ await list(page,'num');await expect(page.locator('.slot-row')).toHaveCount(18);
+ await page.getByRole('button',{name:'Add NumProg · Group 04a · English',exact:true}).click();
+ await page.getByRole('button',{name:'Add NumProg · Group 18a · English',exact:true}).click();
+ await page.getByRole('combobox',{name:'Courses',exact:true}).selectOption('its');
+ await page.getByRole('button',{name:'Add IT Security · Group 16',exact:true}).click();
+ await page.reload();await expect(page.getByRole('button',{name:/My plan/})).toContainText('3');
+ await page.getByRole('button',{name:'Export calendar'}).click();const pending=page.waitForEvent('download');await page.getByRole('button',{name:'Download .ics'}).click();const download=await pending;
+ const body=await fs.readFile((await download.path())!,'utf8');expect(body).toContain('NUM · Group 04a');expect(body).toContain('LOCATION:Online');expect(body).toContain('UID:its-16-');
+ await page.keyboard.press('Escape');await page.getByRole('combobox',{name:'Courses',exact:true}).selectOption('num');await page.getByRole('button',{name:'Week',exact:true}).click();
+ await page.screenshot({path:`artifacts/${info.project.name}-numprog.png`});
+});

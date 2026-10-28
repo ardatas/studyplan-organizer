@@ -9,6 +9,8 @@ Source facts were checked from the user's open Safari course pages and published
 | Analysis | 16 tutorial groups and one homework-help session | Moodle detailed group table supplies exact times, tutors and rooms. Detailed times take precedence over the coarse two-hour overview. Weekly sessions begin 19 October. Lecture times/rooms are not yet verified. |
 | IT Security | 28 active tutorials, one cancelled group and one lecture series | Moodle publishes weekly groups. Group 13 is cancelled. The Friday lecture is a replacement on 20 November for 10 November, not a general weekly Friday lecture. |
 
+| NumProg | 18 active tutorial options | Moodle overrides TUMonline room reservation windows. Includes split groups 04a, 18a/18b and an unnumbered Thursday 16:00 online session. Groups 04b, 10 and 17 do not take place and are excluded. |
+
 ## Official sources
 
 - [GBS tutoring](https://gbs.cm.in.tum.de/tutorials/): `api/tutorials/get_capacity/`, `api/tutors/get_name_id/`, and `api/tutor_sessions/get_week/?group=YYYY-MM-DD`. Importer only stores timetable facts and tutor names.
@@ -16,6 +18,7 @@ Source facts were checked from the user's open Safari course pages and published
 - [GDB Tutor schedule](https://erdbtutor.db.in.tum.de/schedule?course_id=19): GDB2627, 90-minute weekly tutorials.
 - [Analysis tutorial page](https://www.moodle.tum.de/course/view.php?id=123567&section=2): exact quarter-hour times and English groups retained. Homework help is separate from registration tutorials.
 - [IT Security Moodle](https://www.moodle.tum.de/course/view.php?id=121396): missing tutor names remain “Not published”.
+- [NumProg Moodle](https://www.moodle.tum.de/course/view.php?id=121375): authenticated tutorial table checked 28 October. Full two-hour sessions, corrected times and rooms, tutors and teaching languages retained. Recurrence begins in the first published exercise week (19 October) and ends within the teaching period. Online joining links remain on Moodle.
 - [TUM official dates and holidays](https://www.tum.de/fileadmin/w00bfo/www/Studium/Im_Studium/Termine_Fristen/251118__Rundschreiben__Termine_und_Feiertage_2026-2027_final.pdf): teaching 12 October–5 February; 3 December and 24 December–6 January excluded.
 
 ## Exceptions and uncertainty

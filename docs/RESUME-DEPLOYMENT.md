@@ -19,3 +19,11 @@ STUDYPLAN_BASE_URL=https://studyplan.ardatas.com/ npm run test:e2e
 ```
 
 Do not extract obsolete design archives or overwrite `/home/ardatas/public_html`. No credentials or session tokens are stored here.
+
+## Pending NumProg deployment, 28 October 2026
+
+The authenticated Moodle timetable has now been imported from https://www.moodle.tum.de/course/view.php?id=121375. There are 18 active options, including split groups and the unnumbered Thursday 16:00 online tutorial. Cancelled 04b, 10 and 17 are omitted. Moodle explicitly overrides TUMonline reservation times and rooms. Joining links stay on Moodle.
+
+The new local release is `artifacts/studyplan-2026-10-28T04-15-17-267Z.zip`; upload-only file `artifacts/studyplan-v2-upload.zip` has SHA-256 `1ed8a6678e82a909534f6516e5e7f685d33303f739adacba2d47825c7fcdd05f`. An identical convenience copy is `/Users/ardatas/Desktop/studyplan-numprog.zip`. All 13 logic tests and 26 local browser checks passed (24 existing plus two NumProg checks). TypeScript and build passed. Mobile and desktop screenshots are in `artifacts/*-numprog.png`.
+
+Not deployed yet: Safari's native file picker remains disabled despite selecting the archive, refreshing the upload form, and trying the fresh Desktop copy. The user was asked to upload `studyplan-numprog.zip` through the open authenticated cPanel upload tab. The tab targets `/home/ardatas/studyplan.ardatas.com`. After the upload, extract that ZIP in place, move it outside the public root (use a distinct name to preserve the previous archive), then run live file comparison and all browser checks. Update this status only after verified live delivery. No credentials or tokens are saved.

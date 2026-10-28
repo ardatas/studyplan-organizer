@@ -6,8 +6,8 @@ import {slots} from '../src/data.ts';
 import {exportICS,berlinUTC,foldLine,escapeICS} from '../src/calendar.ts';
 import {DEFAULT_PLAN,parsePlan,encodePlan,activeOccurrences,conflicts,layout,monday,berlinNow} from '../src/model.ts';
 const plan=(selected,extra={})=>({...DEFAULT_PLAN,selected,...extra});
-test('all 107 sourced slots have valid, unique dated occurrences',()=>{
- assert.equal(slots.length,107);const ids=new Set();
+test('all 125 sourced slots have valid, unique dated occurrences',()=>{
+ assert.equal(slots.length,125);const ids=new Set();
  for(const s of slots){assert.match(s.source,/^https:\/\//);assert.ok(s.checkedAt);assert.ok(s.occurrences.length);for(const e of s.occurrences){assert.ok(!ids.has(e.id),e.id);ids.add(e.id);assert.ok(e.start<e.end);assert.match(e.date,/^202[67]-\d\d-\d\d$/);assert.ok(e.room);assert.ok(e.tutor);}}
 });
 test('Berlin times stay correct across DST and independent of host timezone',()=>{
@@ -52,4 +52,20 @@ test('overlap groups retain every option and split adjacent sessions',async()=>{
  const {groupOverlapping}=await import('../src/model.ts');
  const events=[{id:'a',start:'10:00',end:'11:00'},{id:'b',start:'10:30',end:'12:00'},{id:'c',start:'11:00',end:'11:30'},{id:'d',start:'12:00',end:'13:00'}];
  const grouped=groupOverlapping(events);assert.deepEqual(grouped.map(g=>g.events.map(e=>e.id)),[['a','b','c'],['d']]);assert.equal(grouped[0].end,'12:00');assert.equal(grouped.flatMap(g=>g.events).length,events.length);
+});
+
+
+test('NumProg uses Moodle corrections, split groups and online options without cancelled groups',()=>{
+ const num=slots.filter(s=>s.course==='num');assert.equal(num.length,18);
+ const first=num.find(s=>s.id==='num-01').occurrences[0];
+ assert.equal(first.start,'10:00');assert.equal(first.room,'00.13.054');
+ assert.equal(num.find(s=>s.id==='num-02').occurrences[0].room,'03.09.012');
+ for(const id of ['num-04b','num-10','num-17'])assert.ok(!num.some(s=>s.id===id));
+ assert.equal(num.find(s=>s.id==='num-18a').occurrences[0].room,'Online');
+ assert.equal(num.find(s=>s.id==='num-18b').occurrences[0].room,'00.08.055');
+ assert.equal(num.find(s=>s.id==='num-online-16').occurrences[0].start,'16:00');
+ for(const s of num)for(const e of s.occurrences)assert.equal(Number(e.end.slice(0,2))-Number(e.start.slice(0,2)),2);
+ assert.equal(num.find(s=>s.id==='num-09').occurrences.find(e=>e.date==='2026-10-28').status,'source-conflict');
+ const p=plan(['num-04a','num-18a','num-09','its-16']);assert.deepEqual(parsePlan(decodeURIComponent(encodePlan(p).slice(6)),slots),p);
+ const ics=exportICS(slots,p);assert.match(ics,/NUM · Group 04a/);assert.match(ics,/LOCATION:Online/);assert.ok(!ics.includes('UID:num-09-2026-10-28@'));
 });
