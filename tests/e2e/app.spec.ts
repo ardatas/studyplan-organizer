@@ -81,3 +81,16 @@ test('Week keeps readable columns on 320, 390 and 768px screens and fits desktop
   await scroll.evaluate(e=>e.scrollLeft=0);if(width===390)await page.screenshot({path:`artifacts/${info.project.name}-mobile-week-v2.png`});
  }
 });
+
+test('Day and Week show the complete time range without vertical scrolling',async({page})=>{
+ await page.getByRole('combobox',{name:'Courses',exact:true}).selectOption('all');
+ for(const viewport of [{width:1440,height:1000},{width:1024,height:768},{width:390,height:844},{width:320,height:800}]){
+  await page.setViewportSize(viewport);
+  for(const view of ['Day','Week']){
+   await page.getByRole('button',{name:view,exact:true}).click();const grid=page.locator('.time-scroll');
+   expect(await grid.evaluate(e=>e.scrollHeight<=e.clientHeight+1)).toBe(true);
+   const bounds=await grid.boundingBox();for(const label of [page.locator('.hours span').first(),page.locator('.hours span').last()]){const box=await label.boundingBox();expect(box!.y).toBeGreaterThanOrEqual(bounds!.y);expect(box!.y+box!.height).toBeLessThanOrEqual(bounds!.y+bounds!.height+1);}
+   for(const event of await page.locator('.positioned-event').all()){const box=await event.boundingBox();expect(box!.y).toBeGreaterThanOrEqual(bounds!.y);expect(box!.y+box!.height).toBeLessThanOrEqual(bounds!.y+bounds!.height+1);}
+  }
+ }
+});

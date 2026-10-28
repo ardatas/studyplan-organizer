@@ -8,8 +8,8 @@ Project: `/Users/ardatas/Desktop/Projects/studyplan-organizer`, branch `codex/tu
 
 - Local production preview: http://127.0.0.1:4173/ (restart with `npm run preview -- --port 4173` if needed).
 - Correct upload: `artifacts/studyplan-v2-upload.zip`.
-- SHA-256: `38b1f07ba1b3fe5496ff7d1250834c7b3abd0ed6662ab29586962871357880b3`.
-- Release: `artifacts/studyplan-2026-10-28T01-33-43-112Z.zip`.
+- SHA-256: `5eecb8dbc71af486d90467bb5352b6c394c756851973f0c2019077f90cc71f29`.
+- Release: `artifacts/studyplan-2026-10-28T01-38-52-861Z.zip`.
 - Screenshots: `artifacts/preview-desktop-v2.png`, `preview-mobile-v2.png`, `detail-mobile-v2.png`, `webkit-mobile-mobile-week-v2.png`.
 - 12 core tests and 20 browser tests pass. Mobile Week fix supports readable horizontally scrolling columns below 901px; desktop retains five-day fit. Focused tests cover 320/390/768/1024px in Chromium and WebKit.
 - Local commits are not pushed. Do not infer remote source publication.
@@ -41,3 +41,7 @@ GDB blue, GBS green, IT Security amber and Analysis rose now apply consistently 
 ## Palette and spacing refinement
 
 Brighter distinct course accents now use deliberate dark surfaces. Added responsive outer gutters, an inset timetable grid, padded day headers and cards, and more space in tutorial rows and controls. Production build and all 20 existing browser checks passed; desktop/mobile screenshots were inspected. Updated release packaged above; publication is still pending.
+
+## Full-day fit
+
+Day and Week now fit 07:00–20:00 into the available table height without vertical scrolling. Event positions and hour lines scale proportionally; short blocks show compact titles and keep complete information in the existing detail dialog. Mobile Week still supports horizontal navigation. Production build and 22 browser tests passed, including full-range visibility and event bounds at 1440×1000, 1024×768, 390×844 and 320×800. Hour-label overlap was additionally checked at 320/390px; desktop and mobile screenshots inspected. Latest mobile screenshot: `artifacts/full-day-mobile.png`.
