@@ -3,7 +3,7 @@ import type {Page} from '@playwright/test';
 import fs from 'node:fs/promises';
 const at='2026-11-04T10:30:00Z';
 async function list(page:Page,course?:string){if(course)await page.getByRole('combobox',{name:'Courses',exact:true}).selectOption(course);const button=page.getByRole('button',{name:'Slot list',exact:true});if(await button.isVisible())await button.click();}
-async function openSelected(page:Page,label:string){await page.getByRole('button',{name:/My plan/}).click();const card=page.locator('.event-card').filter({hasText:label}).first();if(!await card.count())await page.locator('.event-group').first().click();await page.locator('.event-card').filter({hasText:label}).first().click();}
+async function openSelected(page:Page,label:string){await page.getByRole('button',{name:/My plan/}).click();const card=page.locator('.event-card').filter({hasText:label}).first();await page.locator('.event-card').filter({hasText:label}).first().click();}
 test.beforeEach(async({page})=>{await page.clock.install({time:new Date(at)});await page.goto('./');});
 test('course dropdown, readable compact details, selection and persistence',async({page})=>{
  await expect(page.getByRole('heading',{name:'TUM Computer Science · Semester 3',exact:true})).toBeVisible();
@@ -41,9 +41,8 @@ test('calendar views, live line and no horizontal week scrolling',async({page},i
  const viewport=page.viewportSize()!;if(viewport.width>900){expect(await page.locator('.time-scroll').evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);for(const day of await page.locator('.day-heading').all()){const b=await day.boundingBox();expect(b!.x).toBeGreaterThanOrEqual(0);expect(b!.x+b!.width).toBeLessThanOrEqual(viewport.width);}}else{await expect(page.locator('.week-scroll-hint')).toBeVisible();}
  const calendar=await page.locator('.calendar-panel').boundingBox();if(info.project.name==='chromium'){expect(calendar!.y).toBeLessThan(220);expect(calendar!.height).toBeGreaterThan(viewport.height*.75);}
  await page.screenshot({path:`artifacts/${info.project.name}-week-v2.png`,fullPage:false});
- await page.getByRole('button',{name:'Day',exact:true}).click();await page.locator('.event-group').first().click();await expect(page.getByRole('dialog',{name:'Overlapping sessions'})).toBeVisible();
- const card=page.getByRole('dialog').locator('.event-card').first();const size=await card.boundingBox();expect(size!.width).toBeGreaterThan(150);expect(size!.height).toBeGreaterThan(140);await expect(card.locator('.event-room')).toBeVisible();
- await page.keyboard.press('Escape');await expect(page.locator('.event-group').first()).toBeFocused();
+ await page.getByRole('button',{name:'Day',exact:true}).click();const card=page.locator('.overlap-lanes .event-card').first();await card.click();await expect(page.getByRole('dialog')).toContainText('Official source');await expect(page.getByRole('dialog').getByText('Room',{exact:true})).toBeVisible();
+ await page.keyboard.press('Escape');await expect(card).toBeFocused();
  await page.screenshot({path:`artifacts/${info.project.name}-day-v2.png`,fullPage:false});
 });
 test('provisional export, cancelled groups and malformed links',async({page})=>{
@@ -75,7 +74,7 @@ test('Week keeps readable columns on 320, 390 and 768px screens and fits desktop
  for(const width of [320,390,768,1024]){
   await page.setViewportSize({width,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
   const scroll=page.locator('.time-scroll');const group=page.locator('.event-group').first();expect((await group.boundingBox())!.width).toBeGreaterThan(170);
-  expect(await group.locator('.event-time').evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
+  expect(await group.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
   if(width<=900){await expect(page.locator('.week-scroll-hint')).toBeVisible();expect(await scroll.evaluate(e=>e.scrollWidth>e.clientWidth)).toBe(true);await scroll.evaluate(e=>e.scrollLeft=e.scrollWidth);const last=await page.locator('.day-heading').last().boundingBox();expect(last!.x+last!.width).toBeLessThanOrEqual(width);await page.locator('.day-heading').last().click();await expect(page.getByRole('button',{name:'Day',exact:true})).toHaveAttribute('aria-pressed','true');await page.getByRole('button',{name:'Week',exact:true}).click();}
   else expect(await scroll.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
   await scroll.evaluate(e=>e.scrollLeft=0);if(width===390)await page.screenshot({path:`artifacts/${info.project.name}-mobile-week-v2.png`});
@@ -93,4 +92,15 @@ test('Day and Week show the complete time range without vertical scrolling',asyn
    for(const event of await page.locator('.positioned-event').all()){const box=await event.boundingBox();expect(box!.y).toBeGreaterThanOrEqual(bounds!.y);expect(box!.y+box!.height).toBeLessThanOrEqual(bounds!.y+bounds!.height+1);}
   }
  }
+});
+
+test('overlapping sessions have separate clickable lanes inside their time box',async({page})=>{
+ await page.getByRole('combobox',{name:'Courses',exact:true}).selectOption('all');await page.getByRole('button',{name:'Week',exact:true}).click();
+ for(const group of await page.locator('.overlap-lanes').all()){
+  const count=Number((await group.getAttribute('aria-label'))!.split(' ')[0]);await expect(group.locator('.event-card')).toHaveCount(count);
+  const bounds=await group.boundingBox();const lanes=await group.locator('.lane-event').all();const boxes=[];
+  for(const lane of lanes){const box=(await lane.boundingBox())!;expect(box.x).toBeGreaterThanOrEqual(bounds!.x-.1);expect(box.x+box.width).toBeLessThanOrEqual(bounds!.x+bounds!.width+.1);expect(box.y+box.height).toBeLessThanOrEqual(bounds!.y+bounds!.height+.1);boxes.push(box);}
+  for(let i=0;i<boxes.length;i++)for(let j=i+1;j<boxes.length;j++){const a=boxes[i],b=boxes[j];if(a.y<b.y+b.height-.5&&b.y<a.y+a.height-.5)expect(a.x+a.width<=b.x+.5||b.x+b.width<=a.x+.5).toBe(true);}
+ }
+ const last=page.locator('.overlap-lanes .event-card').last();await last.focus();await last.press('Enter');await expect(page.getByRole('dialog')).toBeVisible();await page.keyboard.press('Escape');await expect(last).toBeFocused();
 });

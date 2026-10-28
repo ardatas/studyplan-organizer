@@ -8,8 +8,8 @@ Project: `/Users/ardatas/Desktop/Projects/studyplan-organizer`, branch `codex/tu
 
 - Local production preview: http://127.0.0.1:4173/ (restart with `npm run preview -- --port 4173` if needed).
 - Correct upload: `artifacts/studyplan-v2-upload.zip`.
-- SHA-256: `41cdf4e128a051d31507861a60bc531cda3a01fb58b68925db99d1f84f6ba66d`.
-- Release: `artifacts/studyplan-2026-10-28T01-46-16-302Z.zip`.
+- SHA-256: `f072470b610fcfbea101c4daceceb299d8ad85d4bd635934f045582f0408e13e`.
+- Release: `artifacts/studyplan-2026-10-28T02-06-06-067Z.zip`.
 - Screenshots: `artifacts/preview-desktop-v2.png`, `preview-mobile-v2.png`, `detail-mobile-v2.png`, `webkit-mobile-mobile-week-v2.png`.
 - 12 core tests and 20 browser tests pass. Mobile Week fix supports readable horizontally scrolling columns below 901px; desktop retains five-day fit. Focused tests cover 320/390/768/1024px in Chromium and WebKit.
 - Local commits are not pushed. Do not infer remote source publication.
@@ -53,3 +53,7 @@ Increased outer timetable padding to 24px on desktop and 12px on mobile, increas
 ## Prominent section switch
 
 Renamed primary modes to Find tutorials and My plan. Increased button size, type weight and padding; added desktop icons, a high-contrast active fill and a larger plan count. Mobile buttons retain comfortable 48px touch targets. Production build and all 22 browser checks pass, including full-day fit and 320px layout.
+
+## Side-by-side sessions
+
+Overlapping sessions now render directly in separate proportional lanes inside each time box. Each starts/ends at its sourced time, retains its course colour and opens details directly. Narrow lanes use compact course/group labels with full hover and accessible names. The former overlap picker was removed. All 24 browser checks passed; after a short-screen refinement, the eight affected layout/interaction checks passed again. Tests verify every event is represented, bounds are respected, concurrent lanes do not intersect, keyboard details/focus return work, and the full day remains visible. Desktop and mobile screenshots inspected.
