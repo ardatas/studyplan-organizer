@@ -57,3 +57,14 @@
 @container(min-width:31px){.lane-event .card-course{font-size:12px!important;font-weight:750}.lane-event .card-short-label{font-size:15px;font-weight:750;line-height:1.1}}
 @container(max-width:30px){.lane-event .card-tiny-course{font-size:10px;font-weight:750}.lane-event .card-short-label{font-size:13px;font-weight:750}}
 @container(max-height:35px){.lane-event .card-course,.lane-event .card-tiny-course{font-size:10px!important}.lane-event .card-short-label{font-size:11px;line-height:1}}
+
+/* Saved sessions remain readable context beside the current tutorial options. */
+.event-card.selected-context,.lane-event>.event-card.selected-context{background:color-mix(in srgb,var(--event-color) 9%,transparent);border-color:color-mix(in srgb,var(--event-color) 55%,#a7b9d2);border-style:dashed;box-shadow:none;color:#c3cfdf}
+.event-card.selected-context strong,.event-card.selected-context .card-course,.event-card.selected-context .card-tiny-course,.event-card.selected-context .event-time{color:color-mix(in srgb,var(--event-color) 55%,#c3cfdf)}
+.event-card.selected-context:hover,.event-card.selected-context:focus-visible{background:color-mix(in srgb,var(--event-color) 18%,transparent)}
+.event-card strong{position:relative}.overlap-mark{display:inline-grid;place-items:center;min-width:13px;height:13px;margin-right:3px;border-radius:3px;background:#ffd08a;color:#302410;font:800 11px/1 sans-serif;vertical-align:middle}
+.selection-key{display:flex;flex-wrap:wrap;gap:4px 16px;padding:0 4px 9px;color:#b8c9dc;font-size:11px;flex-shrink:0}.selection-key>span{display:inline-flex;align-items:center;gap:6px}.selection-key i{font-style:normal;border:1px dashed #91a4bc;background:#a7b9d217;color:#c3cfdf;padding:0 4px;border-radius:3px}.selection-key b{color:#ffd08a}
+@container(max-width:55px){.overlap-mark{min-width:9px;width:9px;height:10px;font-size:9px;margin-right:1px}}
+@media(max-width:700px){.selection-key{font-size:10px;gap:3px 10px;padding-bottom:6px}}
+@container(max-height:35px){.lane-event .event-card strong{display:flex;align-items:center;justify-content:center;gap:3px;white-space:nowrap;overflow:hidden}.lane-event .card-course{display:inline;font-size:10px!important}.lane-event .card-full-label{display:none}.lane-event .card-short-label{display:inline;margin:0}.lane-event .overlap-mark{flex-shrink:0;margin:0}}
+@container(max-height:35px) and (max-width:70px){.lane-event .card-course{display:none}.lane-event .card-tiny-course{display:inline;font-size:9px!important}.lane-event .event-card strong{gap:2px}}

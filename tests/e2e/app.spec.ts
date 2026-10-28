@@ -117,3 +117,23 @@ test('NumProg options preserve split groups and selections across courses',async
  await page.keyboard.press('Escape');await page.getByRole('combobox',{name:'Courses',exact:true}).selectOption('num');await page.getByRole('button',{name:'Week',exact:true}).click();
  await page.screenshot({path:`artifacts/${info.project.name}-numprog.png`});
 });
+
+test('selected tutorials stay as translucent context across filters without covering candidates',async({page},info)=>{
+ await list(page,'its');await page.getByRole('button',{name:'Add IT Security · Group 16',exact:true}).click();
+ await page.getByRole('combobox',{name:'Courses',exact:true}).selectOption('num');
+ await page.getByRole('button',{name:'Find tutorials',exact:true}).click();
+ await page.getByRole('button',{name:'Day',exact:true}).click();
+ const saved=page.locator('.event-card[data-slot-id="its-16"]');
+ await expect(saved).toHaveCount(1);await expect(saved).toHaveClass(/selected-context/);
+ await expect(saved).toHaveAccessibleName(/Selected in my plan/);
+ const options=page.locator('.event-card:not(.selected-context)');expect(await options.count()).toBeGreaterThan(0);
+ const overlap=page.locator('.event-card.plan-overlap:not(.selected-context)').first();await expect(overlap).toBeVisible();
+ const a=(await saved.boundingBox())!,b=(await overlap.boundingBox())!;expect(a.x+a.width<=b.x+.5||b.x+b.width<=a.x+.5).toBe(true);
+ await overlap.click();await expect(page.getByRole('dialog')).toContainText('Overlaps your plan: ITS · Group 16');await page.keyboard.press('Escape');
+ await page.screenshot({path:`artifacts/${info.project.name}-selected-context.png`});
+ await page.getByRole('textbox',{name:'Search courses, tutors or rooms'}).fill('no matching tutor');await expect(saved).toHaveCount(1);await expect(options).toHaveCount(0);
+ await page.getByRole('combobox',{name:'Session type'}).selectOption('Lecture');await expect(saved).toHaveCount(1);
+ await page.getByRole('button',{name:'Clear search'}).click();await page.getByRole('combobox',{name:'Session type'}).selectOption('all');
+ await page.getByRole('combobox',{name:'Courses',exact:true}).selectOption('its');await expect(saved).toHaveCount(1);
+ await page.getByRole('button',{name:/My plan/}).click();await expect(saved).not.toHaveClass(/selected-context/);await expect(page.locator('.event-card')).toHaveCount(1);
+});

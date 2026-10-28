@@ -1,5 +1,15 @@
 # Studyplan deployment status
 
+## Pending selected-session context update
+
+Implemented and locally tested on 28 October 2026. Find tutorials retains selected sessions across filters as translucent, muted cards; overlapping candidates remain in separate lanes and show conflict details. My plan retains its normal styling.
+
+Ready archive: `artifacts/studyplan-2026-10-28T05-54-36-265Z.zip`. Upload-only copy: `/Users/ardatas/Desktop/studyplan-selected-context.zip`, SHA-256 `35ed5c1314e250013c0b098b75d79f3a6c702e9dddb180f4aad21bab426d6f06`.
+
+Validation: 15 logic tests and 28 browser tests passed locally; after the final short-card CSS adjustment, all 4 targeted desktop/mobile context and full-day-fit checks passed. No live files uploaded or extracted. Safari control timed out repeatedly and then returned ScreenCaptureKit error -3812. Resume the upload in cPanel File Manager, extract into the dedicated root while preserving hosting settings, verify live files and browser tests, and move the archive outside the public root.
+
+## Last published release
+
 Published and verified on 28 October 2026 at https://studyplan.ardatas.com/.
 
 Project: `/Users/ardatas/Desktop/Projects/studyplan-organizer`, branch `codex/tutorial-calendar`.
@@ -9,7 +19,7 @@ The deployed release is `artifacts/studyplan-2026-10-28T04-15-17-267Z.zip`. Its 
 
 All 11 live files match the final local build. All 26 live browser checks and 13 logic tests passed. Upload ZIPs were moved outside the public root and their old URLs return 404. Hosting-generated settings and the personal site were preserved. See [verification](VERIFICATION.md) for evidence and data limitations.
 
-No application deployment step remains. Source commits are local and have not been pushed. HTTPS works; HTTP also serves the app without a forced redirect.
+The NumProg release is complete; the newer context update above remains pending publication. Source commits are local and have not been pushed. HTTPS works; HTTP also serves the app without a forced redirect.
 
 For a future update, follow [deployment instructions](DEPLOYMENT.md), package a fresh build, preserve hosting-generated settings, upload only app files to the dedicated root, then run:
 
