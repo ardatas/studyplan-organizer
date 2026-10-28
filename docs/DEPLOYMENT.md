@@ -2,6 +2,10 @@
 
 The user selected `studyplan.ardatas.com` on 28 October 2026. The app runs at the root of that subdomain and has its own visual identity. It is a static build: no database, Node server, additional hosting provider, or purchased domain is needed. cPanel was verified to allow five subdomains, with none used before this setup.
 
+## Release selection
+
+Use only the **viewport-v2** release. The earlier uploaded `studyplan-upload.zip` contains the obsolete purple design and must not be extracted. Archive it outside the public document root. The current upload is `studyplan-v2-upload.zip`; its HTML has the `studyplan-release: viewport-v2` marker.
+
 ## Local review
 
 Requires Node 22.12+ (tested with Node 24):
@@ -30,7 +34,7 @@ npm run package
 
 The dated ZIP in `artifacts/` contains `studyplan/`, `SHA256SUMS.txt`, and these instructions. Build assets use `/assets/` paths. Shared plans use URL fragments; no server rewrite is needed.
 
-For manual staging, upload the dated release ZIP outside any public document root, extract it, then copy **the contents of `studyplan/`** into the dedicated document root. Preserve the hosting-generated `.htaccess`; merge optional app headers after inspection. Alternatively, `artifacts/studyplan-upload.zip` contains only public app files and deliberately omits `.htaccess`, so it can be uploaded to the dedicated root and extracted in place. Move the upload ZIP outside the public root afterwards. Do not upload the enclosing folder as an extra URL path, source files, `node_modules`, manifest, or these instructions.
+For manual staging, upload the dated release ZIP outside any public document root, extract it, then copy **the contents of `studyplan/`** into the dedicated document root. Preserve the hosting-generated `.htaccess`; merge optional app headers after inspection. Alternatively, `artifacts/studyplan-v2-upload.zip` contains only public app files and deliberately omits `.htaccess`, so it can be uploaded to the dedicated root and extracted in place. Move the upload ZIP outside the public root afterwards. Do not upload the enclosing folder as an extra URL path, source files, `node_modules`, manifest, or these instructions.
 
 The existing personal site's deployment target is `/home/ardatas/public_html/`. Do not overwrite its `index.html`, `.htaccess`, files, or deployment configuration. The example cPanel YAML is deliberately inactive and contains a placeholder until the actual dedicated document root is verified.
 

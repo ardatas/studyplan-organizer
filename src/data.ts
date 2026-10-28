@@ -5,10 +5,10 @@ import { applyAssemblyException } from './exceptions';
 export {termSource} from './exceptions';
 import type { Slot } from './model';
 export const courses=[
- {id:'gdb',short:'GDB',name:'Grundlagen: Datenbanken',code:'IN0008',color:'#3459b8',coverage:'32 weekly tutorial groups · dates provisional',source:'https://erdbtutor.db.in.tum.de/schedule?course_id=19'},
- {id:'gbs',short:'GBS',name:'Betriebssysteme & Systemsoftware',code:'IN0009',color:'#087e80',coverage:'26 tutorial groups + published lecture dates',source:'https://gbs.cm.in.tum.de/tutorials/'},
- {id:'its',short:'IT Security',name:'IT Sicherheit',code:'IN0042',color:'#8951b0',coverage:'28 active tutorial groups + lecture exceptions',source:'https://www.moodle.tum.de/course/view.php?id=121396'},
- {id:'ana',short:'Analysis',name:'Analysis für Informatik',code:'MA0902',color:'#a95f22',coverage:'16 tutorial groups + homework help',source:'https://www.moodle.tum.de/course/view.php?id=123567&section=2'}
+ {id:'gdb',short:'GDB',name:'Grundlagen: Datenbanken',code:'IN0008',color:'#82b8ff',coverage:'32 weekly tutorial groups · dates provisional',source:'https://erdbtutor.db.in.tum.de/schedule?course_id=19'},
+ {id:'gbs',short:'GBS',name:'Betriebssysteme & Systemsoftware',code:'IN0009',color:'#5cd6c8',coverage:'26 tutorial groups + published lecture dates',source:'https://gbs.cm.in.tum.de/tutorials/'},
+ {id:'its',short:'IT Security',name:'IT Sicherheit',code:'IN0042',color:'#f0bf69',coverage:'28 active tutorial groups + lecture exceptions',source:'https://www.moodle.tum.de/course/view.php?id=121396'},
+ {id:'ana',short:'Analysis',name:'Analysis für Informatik',code:'MA0902',color:'#f28f89',coverage:'16 tutorial groups + homework help',source:'https://www.moodle.tum.de/course/view.php?id=123567&section=2'}
 ];
 const checkedAt='2026-10-28T00:25:00Z';
 const lectureSource='https://www.moodle.tum.de/course/view.php?id=121267';

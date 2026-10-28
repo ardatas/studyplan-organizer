@@ -34,3 +34,14 @@ export function layout<T extends {start:string;end:string}>(events:T[]):(T&{lane
  for(const event of sorted) {if(cluster.length&&event.start>=end)flush();let lane=laneEnds.findIndex(e=>e<=event.start);if(lane<0)lane=laneEnds.length;laneEnds[lane]=event.end;cluster.push({...event,lane,lanes:1});end=cluster.length===1?event.end:(end>event.end?end:event.end);}
  flush();return result;
 }
+
+/** Connected overlap clusters keep desktop weekdays fixed-width without hiding options. */
+export function groupOverlapping<T extends {start:string;end:string}>(events:T[]) {
+ const groups:{start:string;end:string;events:T[]}[]=[];
+ for(const event of [...events].sort((a,b)=>a.start.localeCompare(b.start)||a.end.localeCompare(b.end))){
+  const last=groups.at(-1);
+  if(last&&event.start<last.end){last.events.push(event);if(event.end>last.end)last.end=event.end;}
+  else groups.push({start:event.start,end:event.end,events:[event]});
+ }
+ return groups;
+}

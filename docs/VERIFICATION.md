@@ -1,26 +1,23 @@
 # Verification — 28 October 2026
 
-## Local production build
+## Revised local production build
 
-- TypeScript and Vite production build passed.
-- 11 core tests passed, including Berlin DST conversion, source exceptions, assembly suspensions, conflict layout, plan parsing, UTF-8 line folding and ICS parsing through ical.js.
-- 14 browser tests passed across desktop Chromium and iPhone-sized WebKit. Coverage includes all calendar views, selection/removal, persistence, source details, search, actual overlap warnings, shared previews without overwriting local storage, downloads and their contents, date exclusions, provisional export opt-in, 320px overflow, live time, and range navigation.
-- Desktop and mobile screenshots were inspected for readable time/course/tutor/room blocks.
-- Release SHA-256 manifest and ZIP integrity verified. The upload-only ZIP omits the hosting-generated `.htaccess`.
-- npm audit reported zero vulnerabilities at installation.
+- TypeScript and Vite production build passed; release marker is `viewport-v2`.
+- 12 logic tests passed, including all 107 sourced slots, Berlin DST, source exceptions, assembly suspensions, overlap grouping, plan parsing and ICS parsing/UTF-8 folding.
+- 20 browser tests passed across desktop Chromium and mobile WebKit. Coverage includes selection, persisted plan and course/search/type filters, guarded reset, safe shared previews, unavailable/corrupt storage, compact detail keyboard/outside dismissal and focus return, actual ICS downloads, exclusions, provisional export, calendar views and range navigation.
+- Desktop Week fits all five weekdays without horizontal scrolling at 1024 and 1440 pixels. Below 901 pixels, Week uses readable columns in a horizontal scroller with a visible swipe hint and sticky time axis. Tested at 320, 390 and 768 pixels in both engines, including reaching Friday and opening Day view. Default phone view remains Day.
+- Dark blue full-viewport layout identifies TUM Computer Science semester 3 and carries the university/unofficial attribution at mobile sizes. Desktop calendar starts at 128px and fills over 75% of the viewport.
+- Selected-plan desktop/mobile screenshots, phone Week and compact details were visually inspected. Files use `-v2` names; older purple screenshots are obsolete.
+- Revised ZIP integrity passed. Upload ZIP SHA-256: `041a4224aebe70823acfd990660c8892f03bff41f7cc780d7dd648db1e557f5b`. It excludes hosting-generated `.htaccess`.
 
-## Hosting setup
+## Hosting and publication boundary
 
-cPanel confirmed five available subdomains. Created `studyplan.ardatas.com` with document root `/home/ardatas/studyplan.ardatas.com`; the personal site's root remains `/home/ardatas/public_html`.
+The authorized subdomain exists with its separate document root `/home/ardatas/studyplan.ardatas.com`; the personal site uses `/home/ardatas/public_html`. DNS resolves to `31.210.74.51`, with a valid HTTPS certificate.
 
-DNS resolves the subdomain to `31.210.74.51`. HTTPS responds with certificate validation enabled. Initial document root contained only hosting-generated PHP settings, which are preserved.
+Safari briefly recovered. File Manager accepted moving the obsolete `studyplan-upload.zip` to the account home outside the public root. Its previous public URL now returns 404. The revised upload page opened for the correct document root, but Select File failed with `elementHasNoFrame`; the screenshot fallback failed with `noWindowsAvailable`. No revised upload or extraction succeeded.
 
-Live application checks are recorded after extraction and must not be inferred from upload success.
+Latest direct HTTPS checks: Studyplan root **403**, old ZIP **404**, revised ZIP **404**, personal homepage **200**. The app is **not live**. Live browser tests and file parity checks remain pending. See [resume instructions](RESUME-DEPLOYMENT.md).
 
 ## Limits
 
-No Apple Calendar or Google Calendar account was modified. ICS compatibility is supported by standards/parser checks and real browser downloads, not an end-to-end personal-account import. GDB dated sessions remain provisional. Analysis and GDB lectures remain unverified and omitted. The course snapshot is not a live subscription.
-
-## Publication boundary
-
-The final release ZIP uploaded successfully and its public bytes matched SHA-256 `0eca674f2998a7da87dea6797da99b9393e3e70e1c917dbb5103ec63ffe257e3`. Extraction remains pending because Safari window control became unavailable. Studyplan root still returns HTTP 403; the personal homepage returns HTTP 200. No live app interaction tests have been claimed. See [resume record](RESUME-DEPLOYMENT.md).
+No Apple or Google Calendar account was modified. ICS compatibility is supported by parser and real browser download checks, not a personal-account import. GDB dates remain provisional and require export opt-in. Unverified Analysis and GDB lectures are omitted. Course data is a checked snapshot, not a live subscription.

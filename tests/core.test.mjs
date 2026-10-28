@@ -47,3 +47,9 @@ test('assembly suspension excludes only overlapping known Garching sessions, ret
  for(const slot of slots.filter(s=>s.course==='gdb'))for(const e of slot.occurrences.filter(e=>e.date==='2026-11-10'&&e.start<'11:30'&&e.end>'10:00')){assert.equal(e.status,'source-conflict');assert.ok(!ics.includes('UID:'+e.id+'@'));}
  for(const unchanged of [{...conflict,status:'scheduled',room:'Unknown campus'}, {...conflict,status:'scheduled',start:'11:30',end:'12:30'}, {...conflict,status:'scheduled',start:'08:30',end:'10:00'}, {...conflict,status:'scheduled',date:'2026-11-04'}, {...conflict,status:'cancelled'}])assert.strictEqual(applyAssemblyException(unchanged),unchanged);
 });
+
+test('overlap groups retain every option and split adjacent sessions',async()=>{
+ const {groupOverlapping}=await import('../src/model.ts');
+ const events=[{id:'a',start:'10:00',end:'11:00'},{id:'b',start:'10:30',end:'12:00'},{id:'c',start:'11:00',end:'11:30'},{id:'d',start:'12:00',end:'13:00'}];
+ const grouped=groupOverlapping(events);assert.deepEqual(grouped.map(g=>g.events.map(e=>e.id)),[['a','b','c'],['d']]);assert.equal(grouped[0].end,'12:00');assert.equal(grouped.flatMap(g=>g.events).length,events.length);
+});

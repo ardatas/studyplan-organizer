@@ -1,47 +1,35 @@
 # Resume Studyplan deployment
 
-Status on 28 October 2026: **built, tested, uploaded, not published**.
+Status on 28 October 2026: **revised build tested and packaged; not published**.
 
-## Confirmed state
+## Current deliverables
 
-- User selected and authorized `studyplan.ardatas.com`.
-- cPanel created it with document root `/home/ardatas/studyplan.ardatas.com`.
-- DNS resolves to `31.210.74.51`; HTTPS certificate validation succeeds.
-- Uploaded file: `/home/ardatas/studyplan.ardatas.com/studyplan-upload.zip`.
-- Upload SHA-256: `0eca674f2998a7da87dea6797da99b9393e3e70e1c917dbb5103ec63ffe257e3`. A public download matched the local file byte for byte.
-- The ZIP contains only public app files, with `index.html` at its root. It omits `.htaccess` to preserve cPanel's generated settings.
-- Before extraction, the public app root returns HTTP 403; this is not a successful deployment.
-- Personal homepage returns HTTP 200. Its local reference checkout remains clean.
-- Safari control lost its usable window and reported `noWindowsAvailable`. The user was asked to wake/unlock the Mac and leave File Manager visible. Stop retrying until access returns.
+Project: `/Users/ardatas/Desktop/Projects/studyplan-organizer`, branch `codex/tutorial-calendar`.
 
-## Remaining steps
+- Local production preview: http://127.0.0.1:4173/ (restart with `npm run preview -- --port 4173` if needed).
+- Correct upload: `artifacts/studyplan-v2-upload.zip`.
+- SHA-256: `041a4224aebe70823acfd990660c8892f03bff41f7cc780d7dd648db1e557f5b`.
+- Release: `artifacts/studyplan-2026-10-28T01-19-19-583Z.zip`.
+- Screenshots: `artifacts/preview-desktop-v2.png`, `preview-mobile-v2.png`, `detail-mobile-v2.png`, `webkit-mobile-mobile-week-v2.png`.
+- 12 core tests and 20 browser tests pass. Mobile Week fix supports readable horizontally scrolling columns below 901px; desktop retains five-day fit. Focused tests cover 320/390/768/1024px in Chromium and WebKit.
+- Local commits are not pushed. Do not infer remote source publication.
 
-1. Reconnect to the existing signed-in Safari cPanel window using computer-use tools. Do not reuse old accessibility indices or session URLs.
-2. In File Manager, open `/home/ardatas/studyplan.ardatas.com`. Select `studyplan-upload.zip` and choose **Extract**. Verify the extraction destination is exactly `/home/ardatas/studyplan.ardatas.com`, with no extra enclosing folder.
-3. Confirm `index.html`, `favicon.svg`, `assets/` and `licenses/` are present. Preserve the existing `.htaccess`, `.user.ini` and `php.ini`.
-4. Move the upload ZIP outside all public roots, for example to `/home/ardatas/studyplan-upload-20261028.zip`, after checking the destination is unused. Do not empty Trash or delete unrelated files.
-5. Inspect the subdomain's HTTPS redirect setting in Domains; enable only for Studyplan after confirming a valid certificate. Leave personal-domain settings unchanged.
-6. Run the live artifact and browser checks from the local project:
+## Confirmed hosting state
 
-```sh
-node scripts/verify-live.mjs
-STUDYPLAN_BASE_URL=https://studyplan.ardatas.com/ npm run test:e2e
-```
+User authorized `studyplan.ardatas.com`, created with separate root `/home/ardatas/studyplan.ardatas.com`. Validated HTTPS; root currently 403. Personal homepage 200.
 
-7. Inspect the live screenshots, test a shared URL and ICS download, and update `docs/VERIFICATION.md` with actual outcomes. The tests use isolated browser storage and never import into a personal calendar account.
-8. Record the final source-control status and deliver the live URL only once it renders successfully.
+Old purple upload `studyplan-upload.zip` was moved via cPanel to account home (`/` in the relative destination field). Old public URL now 404. Do not extract that obsolete release. The v2 archive has not uploaded: its public URL is 404.
 
-## Local deliverables
+Safari access briefly recovered, then the upload button failed with `elementHasNoFrame` and coordinate fallback failed with `noWindowsAvailable`. The correct cPanel upload tab is open. Stop retrying until usable window access returns.
 
-Project: `/Users/ardatas/Desktop/Projects/studyplan-organizer`.
+## Remaining steps when Safari is accessible
 
-- Local production preview: http://127.0.0.1:4173/ (running when this record was written; restart with `npm run preview -- --port 4173` if needed).
-- Upload archive: `artifacts/studyplan-upload.zip`.
-- Release archive: `artifacts/studyplan-2026-10-28T00-49-03-172Z.zip`.
-- Desktop sample: `artifacts/preview-desktop.png`.
-- Mobile sample: `artifacts/preview-mobile.png`.
-- Core tests: 11 passed. Production browser tests: 14 passed across Chromium and mobile WebKit.
-- Independent review confirmed the assembly-conflict exclusions and date-range navigation fixes.
-- Branch: `codex/tutorial-calendar`. Implementation commit: `3541652`. Local commits have not been pushed; this does not imply remote publication.
+1. Reconnect using computer-use tools and fresh observations. No saved session URLs or stale indices.
+2. Use the existing upload page targeting `/home/ardatas/studyplan.ardatas.com`. Upload only `studyplan-v2-upload.zip` from the local artifacts folder.
+3. Verify uploaded bytes, then extract exactly into the dedicated document root. Confirm `index.html`, `assets/`, `licenses/`, `favicon.svg`; preserve `.htaccess`, `.user.ini`, `php.ini`.
+4. Move the v2 ZIP outside public roots after checking the destination is unused. Do not empty Trash or modify unrelated files.
+5. Enable HTTPS redirect only for Studyplan if available, preserving personal-domain settings.
+6. Run `node scripts/verify-live.mjs` and `STUDYPLAN_BASE_URL=https://studyplan.ardatas.com/ npm run test:e2e`. Verify live screenshots/shared preview/downloads without importing into a calendar account.
+7. Update verification and delivery status with actual results; do not call upload success publication.
 
-No credentials or session tokens are stored in this record.
+No credentials or session tokens are stored here.
