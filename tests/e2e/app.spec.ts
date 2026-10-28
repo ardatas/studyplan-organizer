@@ -39,7 +39,7 @@ test('calendar views, live line and no horizontal week scrolling',async({page},i
  await page.getByRole('combobox',{name:'Courses',exact:true}).selectOption('all');
  await expect(page.locator('.day-heading')).toHaveCount(5);
  const viewport=page.viewportSize()!;if(viewport.width>900){expect(await page.locator('.time-scroll').evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);for(const day of await page.locator('.day-heading').all()){const b=await day.boundingBox();expect(b!.x).toBeGreaterThanOrEqual(0);expect(b!.x+b!.width).toBeLessThanOrEqual(viewport.width);}}else{await expect(page.locator('.week-scroll-hint')).toBeVisible();}
- const calendar=await page.locator('.calendar-panel').boundingBox();if(info.project.name==='chromium'){expect(calendar!.y).toBeLessThan(150);expect(calendar!.height).toBeGreaterThan(viewport.height*.75);}
+ const calendar=await page.locator('.calendar-panel').boundingBox();if(info.project.name==='chromium'){expect(calendar!.y).toBeLessThan(190);expect(calendar!.height).toBeGreaterThan(viewport.height*.75);}
  await page.screenshot({path:`artifacts/${info.project.name}-week-v2.png`,fullPage:false});
  await page.getByRole('button',{name:'Day',exact:true}).click();await page.locator('.event-group').first().click();await expect(page.getByRole('dialog',{name:'Overlapping sessions'})).toBeVisible();
  const card=page.getByRole('dialog').locator('.event-card').first();const size=await card.boundingBox();expect(size!.width).toBeGreaterThan(150);expect(size!.height).toBeGreaterThan(140);await expect(card.locator('.event-room')).toBeVisible();

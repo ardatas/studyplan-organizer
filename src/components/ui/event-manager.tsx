@@ -1,6 +1,6 @@
 /** Adapted from the user-supplied EventManager reference: source events are read-only. */
 import { useEffect, useRef, useState } from 'react';
-import type { CSSProperties } from 'react';
+import {courseStyle} from '../../course-colors';
 import { ChevronLeft, ChevronRight, CalendarDays, Clock3, List, Rows3 } from 'lucide-react';
 import { addDays, days, groupOverlapping, minutes, monday, weekday } from '../../model';
 import type { Occurrence, Slot } from '../../model';
@@ -9,9 +9,8 @@ export type CalendarEvent=Occurrence & {slot:Slot;selected:boolean};
 const HOUR=128;
 export type View='month'|'week'|'day'|'list';
 export function formatDate(date:string,opts:Intl.DateTimeFormatOptions={day:'numeric',month:'short'}) {return new Date(date+'T12:00:00Z').toLocaleDateString('en-GB',{...opts,timeZone:'UTC'});}
-const color=(course:string)=>({gbs:'#5cd6c8',gdb:'#82b8ff',its:'#f0bf69',ana:'#f28f89'})[course]||'#5cd6c8';
 export function EventCard({event,onClick,compact=false}:{event:CalendarEvent;onClick:(e:CalendarEvent,returnTarget?:HTMLElement)=>void;compact?:boolean}) {
- return <button className={`event-card ${event.selected?'chosen':''} ${event.status==='provisional'?'provisional':''} ${compact?'compact':''}`} style={{'--event-color':color(event.slot.course)} as CSSProperties} onClick={click=>onClick(event,click.currentTarget)} aria-label={`${event.slot.course.toUpperCase()} ${event.slot.label}, ${event.date}, ${event.start}–${event.end}, ${event.tutor}, ${event.room}`}>
+ return <button className={`event-card ${event.selected?'chosen':''} ${event.status==='provisional'?'provisional':''} ${compact?'compact':''}`} style={courseStyle(event.slot.course)} onClick={click=>onClick(event,click.currentTarget)} aria-label={`${event.slot.course.toUpperCase()} ${event.slot.label}, ${event.date}, ${event.start}–${event.end}, ${event.tutor}, ${event.room}`}>
   <span className="event-time">{event.start}–{event.end}{event.selected?' ✓':''}</span><strong>{event.slot.course.toUpperCase()} · {event.slot.label}</strong>{!compact&&<><span>{event.tutor}</span><span className="event-room">{event.room}</span></>}{event.status==='provisional'&&<small>Provisional dates</small>}
  </button>;
 }
@@ -36,7 +35,7 @@ export function EventManager({events,today,now,onEventClick,initialDate,rangeFro
  <div className="time-heading">TIME</div>{dateList.map(d=><button key={d} className={`day-heading ${d===today?'today':''}`} onClick={()=>{setDate(d);setView('day');}}><span>{days[weekday(d)]}</span><strong>{d.slice(8)}</strong><small>{formatDate(d,{month:'short'})}</small></button>)}
  <div className="hours">{Array.from({length:13},(_,i)=><span key={i} style={{top:i*HOUR}}>{String(i+7).padStart(2,'0')}:00</span>)}</div>
  {gridDays.map(d=><div key={d.date} className={`day-column ${d.date===today?'today-column':''}`}>
- {d.groups.map(group=><div key={group.events[0].id} className="positioned-event" style={{top:(minutes(group.start)-420)*HOUR/60,height:(minutes(group.end)-minutes(group.start))*HOUR/60-5}}>{group.events.length===1?<EventCard event={group.events[0]} onClick={onEventClick}/>:<button className="event-group" onClick={click=>{optionsTrigger.current=click.currentTarget;openingDetail.current=false;setOptions(group.events);}} aria-label={`${group.events.length} overlapping sessions, ${d.date}, ${group.start}–${group.end}`}><span className="event-time">{group.start}–{group.end}</span><strong>{group.events.length} overlapping sessions</strong><span className="group-courses">{[...new Set(group.events.map(e=>e.slot.course.toUpperCase()))].join(' · ')}</span><span className="group-preview">{group.events.slice(0,2).map(e=><span key={e.id}>{e.slot.label}<small>{e.tutor}</small></span>)}</span><span className="group-action">View {group.events.length} options →{group.events.some(e=>e.selected)&&' · selected'}</span></button>}</div>)}
+ {d.groups.map(group=><div key={group.events[0].id} className="positioned-event" style={{top:(minutes(group.start)-420)*HOUR/60,height:(minutes(group.end)-minutes(group.start))*HOUR/60-5}}>{group.events.length===1?<EventCard event={group.events[0]} onClick={onEventClick}/>:<button className="event-group" onClick={click=>{optionsTrigger.current=click.currentTarget;openingDetail.current=false;setOptions(group.events);}} aria-label={`${group.events.length} overlapping sessions, ${d.date}, ${group.start}–${group.end}`}><span className="event-time">{group.start}–{group.end}</span><strong>{group.events.length} overlapping sessions</strong><span className="group-courses">{[...new Set(group.events.map(e=>e.slot.course))].map(course=><span className="course-badge" key={course} style={courseStyle(course)}>{course.toUpperCase()}</span>)}</span><span className="group-preview">{group.events.slice(0,2).map(e=><span key={e.id} style={courseStyle(e.slot.course)}><b className="preview-course">{e.slot.course.toUpperCase()}</b> {e.slot.label}<small>{e.tutor}</small></span>)}</span><span className="group-action">View {group.events.length} options →{group.events.some(e=>e.selected)&&' · selected'}</span></button>}</div>)}
  {d.date===today&&minutes(now)>=420&&minutes(now)<1200&&<div className="now-line" data-testid="now-line" style={{top:(minutes(now)-420)*HOUR/60}}><span>{now}</span></div>}
  </div>)}
  </div></div></>}

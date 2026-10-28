@@ -6,9 +6,9 @@
 - 12 logic tests passed, including all 107 sourced slots, Berlin DST, source exceptions, assembly suspensions, overlap grouping, plan parsing and ICS parsing/UTF-8 folding.
 - 20 browser tests passed across desktop Chromium and mobile WebKit. Coverage includes selection, persisted plan and course/search/type filters, guarded reset, safe shared previews, unavailable/corrupt storage, compact detail keyboard/outside dismissal and focus return, actual ICS downloads, exclusions, provisional export, calendar views and range navigation.
 - Desktop Week fits all five weekdays without horizontal scrolling at 1024 and 1440 pixels. Below 901 pixels, Week uses readable columns in a horizontal scroller with a visible swipe hint and sticky time axis. Tested at 320, 390 and 768 pixels in both engines, including reaching Friday and opening Day view. Default phone view remains Day.
-- Dark blue full-viewport layout identifies TUM Computer Science semester 3 and carries the university/unofficial attribution at mobile sizes. Desktop calendar starts at 128px and fills over 75% of the viewport.
+- Dark blue full-viewport layout identifies TUM Computer Science semester 3 and carries the university/unofficial attribution at mobile sizes. Desktop calendar starts at 166px and fills over 75% of the viewport.
 - Selected-plan desktop/mobile screenshots, phone Week and compact details were visually inspected. Files use `-v2` names; older purple screenshots are obsolete.
-- Revised ZIP integrity passed. Upload ZIP SHA-256: `041a4224aebe70823acfd990660c8892f03bff41f7cc780d7dd648db1e557f5b`. It excludes hosting-generated `.htaccess`.
+- Revised ZIP integrity passed. Upload ZIP SHA-256: `7091170593191b901d8ac0f0c1e6bbda58a825a63f2019b923abdc73f72d7c07`. It excludes hosting-generated `.htaccess`.
 
 ## Hosting and publication boundary
 
@@ -21,3 +21,7 @@ Latest direct HTTPS checks: Studyplan root **403**, old ZIP **404**, revised ZIP
 ## Limits
 
 No Apple or Google Calendar account was modified. ICS compatibility is supported by parser and real browser download checks, not a personal-account import. GDB dates remain provisional and require export opt-in. Unverified Analysis and GDB lectures are omitted. Course data is a checked snapshot, not a live subscription.
+
+## Course colour update
+
+GDB blue, GBS teal, IT Security amber and Analysis coral now apply consistently to calendar cards, overlap badges, tutorial rows, selected states, course filtering and compact details. The course key shows selection counts across courses. Production build and all 20 browser tests passed again. Additional Chromium/WebKit checks selected one tutorial from each course and verified four distinct row colours and all four choices after reload. Screenshots: `artifacts/course-colours-desktop.png` and `artifacts/course-colours-mobile.png`. Hosting remains pending the previously recorded Safari blocker.
